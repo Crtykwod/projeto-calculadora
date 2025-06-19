@@ -71,11 +71,19 @@ int main() {
     } else {
       printf("Resultado: %g %c %g = %g\n", n1, operator, n2, result);
     }
-  
-    printf("\nDeseja realizar outra operação? (s/n): ");
-    scanf(" %c", &doAgain);
 
-  } while (doAgain == 's' || doAgain == 'S');
+    while (doAgain != 's' || doAgain != 'S' || doAgain != 'n' || doAgain != 'N') {  
+      printf("\nDeseja realizar outra operação? (s/n): ");
+      scanf(" %c", &doAgain);
+
+      if (doAgain == 's' || doAgain == 'S' || doAgain == 'n' || doAgain == 'N') break;
+
+      printf("Resposta inválida, por favor digita 's' para sim ou 'n' para não\n");
+    }
+    
+
+
+  } while (doAgain != 's' || doAgain != 'S');
 
   if (doAgain != 's' || doAgain != 'S') {
     printf("\nObrigado por usar a calculadora! Até a próxima. ^-^\n");
