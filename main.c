@@ -37,7 +37,7 @@ float getNumber() {
         return number;
       }
     } else {
-      printf("Fim da entrada. Saindo...\n");
+      printf("\nFim da entrada. Saindo...\n");
       exit(0);
     }
 
@@ -50,9 +50,13 @@ int main() {
   float n1, n2, result;
   char operator;
   char doAgain = 's';
+
+  int calculation_error;
   
   do {
-    printf("===============================\nCalculadora Simples\n===============================\n");
+    calculation_error = 0;
+
+    printf("\n===============================\nCalculadora Simples\n===============================\n");
   
     while (option < 1 || option > 5) {
       showMenu(&option);
@@ -79,16 +83,14 @@ int main() {
       case 4:
         if (n2 == 0) {
           printf("Erro: Divisão por Zero não é permitida.\n");
-          option = 0; 
-          printf("\n");
-          continue; 
+          calculation_error = 1;
         }
         result = n1 / n2; operator = '/'; break;
     }
 
     if (option == 2 && n2 < 0) {
       printf("Resultado: %g %c (%g) = %g\n", n1, operator, n2, result);
-    } else {
+    } else if (!calculation_error) {
       printf("Resultado: %g %c %g = %g\n", n1, operator, n2, result);
     }
 
