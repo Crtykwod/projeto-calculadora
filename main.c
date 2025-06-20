@@ -1,9 +1,13 @@
 #include <stdio.h>
 
+int option;
+float n1, n2, result;
+char operator;
+char doAgain;
+
 void showMenu(int *option) {
   int o;
 
-  printf("===============================\nCalculadora Simples\n===============================\n");
   printf("Selecione uma operação:\n");
   printf("1. Adição\n2. Subtração\n3. Multiplicação\n4. Divisão\n5. Sair\n");
   printf("Opção: ");
@@ -13,17 +17,15 @@ void showMenu(int *option) {
 }
 
 int main() {
-  int option;
-  float n1, n2, result;
-  char operator;
-  char doAgain;
 
   do {
-    showMenu(&option);
-    
-    if (option > 5 || option < 0) {
-      printf("Opção Inválida, por favor selecione uma opção de 1 à 4\n");
-      return 0;
+    printf("===============================\nCalculadora Simples\n===============================\n");
+  
+    while (option < 1 || option > 5) {
+      showMenu(&option);
+      if(option > 0 && option <= 5) continue;
+      
+      printf("\nOpção inválida! Por favor, selecione um número de 1 à 5.\n");
     }
 
     if (option == 5) {
@@ -55,7 +57,7 @@ int main() {
       case 4:
         if (n2 == 0) {
           printf("Erro: Divisão por Zero não é permitida.\n");
-          break;
+          continue;
         }
         result = n1 / n2;
         operator = '/';
@@ -63,7 +65,7 @@ int main() {
         
       default:
         printf("Algo deu errado, por favor tente novamente!");
-        return 0;
+        continue;
     }
 
     if (option == 2 && n2 < 0) {
@@ -75,17 +77,18 @@ int main() {
     while (doAgain != 's' || doAgain != 'S' || doAgain != 'n' || doAgain != 'N') {  
       printf("\nDeseja realizar outra operação? (s/n): ");
       scanf(" %c", &doAgain);
+      option = 0;
 
       if (doAgain == 's' || doAgain == 'S' || doAgain == 'n' || doAgain == 'N') break;
 
       printf("Resposta inválida, por favor digita 's' para sim ou 'n' para não\n");
     }
     
-
-
-  } while (doAgain != 's' || doAgain != 'S');
+  } while (doAgain == 's' || doAgain == 'S');
 
   if (doAgain != 's' || doAgain != 'S') {
     printf("\nObrigado por usar a calculadora! Até a próxima. ^-^\n");
   }
+
+  return 0;
 }
